@@ -1,0 +1,30 @@
+<div class="container">
+<div class="form-wrap">
+  <h1>Login</h1>
+  {{#if messages.success_msg}}
+        <div class="error">
+             <p>{{messages.success_msg}}</p>
+        </div>
+      {{/if}}
+      {{#if messages.error}}
+        <div class="error">
+             <p>{{messages.error}}</p>
+        </div>
+      {{/if}}
+  <form action="/users/login" method="POST">
+    
+    <div class="input-group">
+          <label >Email</label>
+          <input type="email" name="email" id="email" class="input-box" placeholder="Email"
+            maxlength="100"  />
+        </div> 
+    <div class="input-group">
+          <label >Password</label>
+          <input type="password" name="password" id="password" class="input-box" placeholder="Password"
+            maxlength="100" />
+        </div>  
+      <input type="submit" value="Login" class="btn btn-reverse " />
+    <a href="/users/register">Register</a>              
+  </form>
+</div>
+</div>
