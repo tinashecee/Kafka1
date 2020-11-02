@@ -1,0 +1,15 @@
+{
+  "name": "Kafka1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "topic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kafkajs": "^1.14.0"
+  }
+}
