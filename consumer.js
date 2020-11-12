@@ -1,13 +1,14 @@
 const { Kafka } = require('kafkajs')
-
+const redis = require('redis');
 const kafka = new Kafka({
     'clientId':'myapp',
     'brokers': ['localhost:19092','localhost:29092','localhost:39092']
 })
-
-const topic = 'testTopicAgain'
+//create Redis client
+let client = redis.createClient();
+const topic = 'testQueue2'
 const consumer = kafka.consumer({
-  groupId: 'group1'
+  groupId: 'group2'
 })
 
 const run = async () => {
@@ -17,13 +18,29 @@ const run = async () => {
     eachMessage: async ({ message }) => {
       try {
         const jsonObj = JSON.parse(message.value.toString())
-        let passengerInfo = filterPassengerInfo(jsonObj)
+        const id = jsonObj.id;
+        const name = jsonObj.name;
+        const timestamp = JSON.parse(message.timestamp.toString())
+        const offset = JSON.parse(message.offset.toString())
+     /*   let passengerInfo = filterPassengerInfo(jsonObj)
         if (passengerInfo) {
           console.log(
             '******* Alert!!!!! passengerInfo *********',
             passengerInfo
           )
-        }
+        }*/
+        console.log(id,timestamp, offset);
+        await client.hmset(id, [
+          'timestamp', timestamp,
+          'name', name,
+          'offset', offset
+      ], function(err, reply){
+          if(err){
+              console.log(err);
+          }
+          console.log(reply);
+          
+      });
       } catch (error) {
         console.log('err=', error)
       }

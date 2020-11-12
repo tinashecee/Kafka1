@@ -12,7 +12,7 @@ async function  run(){
            console.log('Connected!')
            await admin.createTopics({
                'topics': [{
-                   'topic':'testTopicAgain',
+                   'topic':'testQueue5',
                    'numPartitions':1
                }]
            })

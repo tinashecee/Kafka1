@@ -1,0 +1,57 @@
+
+<section class="featured section" id="featured">
+    
+       <h1 class="queue__title">Waiting Room</h1>
+       <br>
+       <h2 class="section-title">Status: Waiting  |  Time Elapsed: 10:10</h2>
+      
+        <div id="container"></div>
+         <br>
+         <div class="new__container bd-grid">
+           <div class="featured__product">
+               <div class="featured__box">
+                   <div class="featured__new">Queue Position</div>
+                    <h1 class="offer__description"><br><span><%= pos %></span></h1>
+               </div>
+               
+           </div>
+           <div class="featured__product">
+               <div class="featured__box">
+                   <div class="featured__new">Estimated Wait Time</div>
+                   <h1 class="offer__description"><br><span>10M</span></h1>
+               </div>
+               
+           </div>
+           <div class="featured__product">
+               <div class="featured__box">
+                   <div class="featured__new">Teller</div>
+                   <h1 class="offer__description"><br><span>1</span></h1>
+               </div>
+               
+           </div>
+           
+            
+            
+       </div> 
+       <br>
+       
+       <div id="btn">
+        <a href="#" id="myBtn" style="display: block;cursor: pointer; transition: .5s;text-align:center;width: 50%;margin: auto;padding:auto;" class="button">Exit Queue</a>
+</div>
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="container">
+      <span class="close">&times;</span>
+      <p>Are you sure you want to Exit the Queue?</p>
+      <br>
+      <a href="/users/exitq" style="float: left;" class="btna danger">Exit</a>
+      <a href="#" style="float: right;" class="btna default cloze">Cancel</a>
+    </div>
+    </div>
+  
+  </div>
+            </section>
+
+          
