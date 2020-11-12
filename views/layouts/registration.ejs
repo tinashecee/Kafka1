@@ -37,6 +37,7 @@
                  <li class="nav__item"><a href="/users/queue" class="nav__link">My Queue</a></li>
                  <% if (authed) { %>
                     <li class="nav__item"><a href="/users/logout" class="nav__link" > Sign Out </a></li>
+                    <li class="nav__item"><a href="/users/queue" style="color:#f44336" class="nav__link"><%= user %></a></li>
                     <% } else{ %>
                       <li class="nav__item"><a href="/users/login" class="nav__link" > Sign In </a></li>
                       <% } %>

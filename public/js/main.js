@@ -33,6 +33,8 @@ window.onload = function onLoad() {
       });
       bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
       bar.text.style.fontSize = '2rem';
+      let timerId = setInterval(() => getPos1(), 2000);
+       function getPos1(){
       fetch('/pos').then(function(response) {
         response.json().then(function(text) {
 
@@ -43,9 +45,20 @@ window.onload = function onLoad() {
           bar.animate(num);  // Number from 0.0 to 1.0
         });
       });
+    }
       
 };
-
+let timerId = setInterval(() => getPos(), 2000);
+function getPos(){
+    fetch('/pos').then(function(response) {
+        response.json().then(function(text) {
+          let num = 1;
+           num = text.pos;
+          document.getElementById("qp").innerHTML = num;
+          
+        });
+      });
+}
 function addcl(){
 	let parent = this.parentNode.parentNode;
 	parent.classList.add("focus");
