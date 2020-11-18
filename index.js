@@ -16,6 +16,7 @@ const app = express();
 let authed = false;
 let nam = '';
 let usrId = '' ;
+let errors =[];
 initializePassport(passport);
 //create Redis client
 let client = redis.createClient();
@@ -267,10 +268,10 @@ app.get('/users/exitq', (req,res) => {
     res.redirect("/");
 });
 app.get('/users/register', checkAuthenticated, (req,res) => {
-    res.render('reg',{layout:'./layouts/registration',authed:authed});
+    res.render('reg',{layout:'./layouts/registration',authed:authed,user:nam,errors:errors});
 });
 app.get('/users/login',checkAuthenticated, (req,res) => {
-    res.render('log',{layout:'./layouts/registration',authed:authed});
+    res.render('log',{layout:'./layouts/registration',authed:authed,user:nam});
 });
 app.get('/users/dashboard',checkNotAuthenticated, (req,res) => {
     let nam = (req.user.name).charAt(0).toUpperCase() + (req.user.name).slice(1)
@@ -278,15 +279,18 @@ app.get('/users/dashboard',checkNotAuthenticated, (req,res) => {
 });
 app.get('/users/logout', (req,res) => {
     req.logOut();
+    authed =false;
+    usrId=''
+    nam=''
     req.flash('success_msg', 'You logged out');
     res.redirect('/users/login');
 });
 app.post('/users/register', async (req,res) => {
-    let { name, email, password, password2 } = req.body;
-    console.log({name, email, password, password2 });
+    let { name, email, password,phone,  password2 } = req.body;
+    console.log({name, email,phone, password, password2 });
 
-    let errors =[];
-    if(!name || !email || !password || !password2){
+    
+    if(!name || !email || !phone || !password || !password2){
          errors.push({message: "Please enter all fields"});
     }
     if(password.length<6){
@@ -295,9 +299,11 @@ app.post('/users/register', async (req,res) => {
    if(password != password2 ){
     errors.push({message: "Passwords do not match"});
    }
+   
    if(errors.length >0 ){
-    res.render("register",{errors});
-   }else{
+       console.log(errors)
+    res.render("reg",{layout:'./layouts/registration',authed:authed,user:nam,errors:errors});
+   }else{ 
        let hashedPassword = await bcrypt.hash(password, 10);
 
        pool.query(
@@ -314,10 +320,10 @@ app.post('/users/register', async (req,res) => {
                 res.render("register",{errors});
               }else{
                   pool.query(
-                      `INSERT INTO users (name, email, password)
-                      VALUES ($1, $2, $3)
+                      `INSERT INTO users (name, email, phone, password)
+                      VALUES ($1, $2, $3, $4)
                       RETURNING id, password`,
-                      [name, email, hashedPassword], 
+                      [name, email, phone, hashedPassword], 
                       (err, results) => {
                           if(err){
                               throw err;
@@ -453,6 +459,7 @@ app.post('/users/joinq', async (req,res) => {
     let { bank, branch, service } = req.body;
     let id = req.user.id;
     let name = req.user.name;
+    let phone = req.user.phone;
    
 
     
@@ -461,7 +468,8 @@ app.post('/users/joinq', async (req,res) => {
         name:name,
         bank:bank,
         branch:branch,
-        service:service
+        service:service,
+        phone:phone
     }
 
     let errors =[];

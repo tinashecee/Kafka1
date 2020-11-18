@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "topic.js",
+  "engines":"10.19.0",
   "scripts": {
     "dev": "nodemon server.js"
   },
@@ -19,7 +20,6 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-flash": "0.0.2",
-    "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
     "kafkajs": "^1.14.0",
     "materialize-css": "^1.0.0-rc.2",
@@ -29,7 +29,6 @@
     "path": "^0.12.7",
     "pg": "^8.4.2",
     "progressbar.js": "^1.1.0",
-    "redis": "^3.0.2",
-    "websocket": "^1.0.32"
+    "redis": "^3.0.2"
   }
 }
