@@ -5,7 +5,10 @@ const kafka = new Kafka({
     'brokers': ['localhost:19092','localhost:29092','localhost:39092']
 })
 //create Redis client
-let client = redis.createClient();
+let client = redis.createClient({
+  port      : 6379,               // replace with your port
+  host      : 'rdb',
+});
 const topic = 'testQueue2'
 const consumer = kafka.consumer({
   groupId: 'group2'

@@ -10,8 +10,8 @@ const flash = require('express-flash');
 const passport = require('passport');
 const redis = require('redis');
 const initializePassport = require('./passportConfig');
-const sendToKafka = require('./producer');
-_ = require('lodash');
+const sendToKafka = require('./prod');
+const _ = require('lodash');
 const app = express();
 let authed = false;
 let nam = '';
@@ -19,9 +19,11 @@ let usrId = '' ;
 let errors =[];
 initializePassport(passport);
 //create Redis client
-let client = redis.createClient();
+let client = redis.createClient({port:14560,host:'redis-14560.c16.us-east-1-2.ec2.cloud.redislabs.com',no_ready_check: true,
+auth_pass: 'redissecurepassword001', });
+
 let pos1 = 1;
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 5000
 //app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 //app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
@@ -509,5 +511,3 @@ function checkNotAuthenticated(req,res,next){
     res.redirect("/users/login");
 }
 app.listen(PORT, console.log(`Server running on port ${PORT}`));
-
-

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "topic.js",
-  "engines":"10.19.0",
+  "engines": "10.19.0",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +21,11 @@
     "express-ejs-layouts": "^2.5.0",
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
+    "firebase-admin": "^9.4.1",
     "kafkajs": "^1.14.0",
+    "lodash": "^4.17.20",
     "materialize-css": "^1.0.0-rc.2",
+    "node-rdkafka": "^2.10.0",
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
