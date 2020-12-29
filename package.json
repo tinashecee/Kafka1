@@ -21,8 +21,6 @@
     "express-ejs-layouts": "^2.5.0",
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
-    "firebase-admin": "^9.4.1",
-    "kafkajs": "^1.14.0",
     "lodash": "^4.17.20",
     "materialize-css": "^1.0.0-rc.2",
     "node-rdkafka": "^2.10.0",
