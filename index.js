@@ -23,7 +23,7 @@ let client = redis.createClient({port:14560,host:'redis-14560.c16.us-east-1-2.ec
 auth_pass: 'redissecurepassword001', });
 
 let pos1 = 1;
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8080
 //app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 //app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
@@ -482,7 +482,7 @@ app.post('/users/joinq', async (req,res) => {
    if(errors.length >0 ){
     res.render("joinq",{errors, authed:authed});
    }else{
-       
+       console.log("success apo"); 
       sendToKafka(payload);
       var delayInMilliseconds = 2500; 
 
